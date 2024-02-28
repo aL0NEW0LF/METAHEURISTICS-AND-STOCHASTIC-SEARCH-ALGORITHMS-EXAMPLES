@@ -39,8 +39,10 @@ int main()
     C1.bin2string(str);
     cout << "C1 = " << str << endl;
 
-    
+    // init chromosome from another chromosome
+    chromosome C3(C1);
 
+    cout << "C3 = " << C3 << endl;
     
     return 0;
 }

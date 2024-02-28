@@ -17,6 +17,15 @@ chromosome::chromosome( const chromosome &chrom ) {
     Fitness = chrom.Fitness;
 }
 
+/* evaluate function pseudocode, until we implemente the parameters class  */
+/* void chromosome::evaluer() {
+    if(para->type_option){
+        Fitness = objfunc(*this);
+    } else {
+        Fitness = -objfonc(*this);
+    }
+} */
+
 void chromosome::evaluer() {
     Fitness = 0;
     for ( int i = 0; i < Longueur; i++ ) {
