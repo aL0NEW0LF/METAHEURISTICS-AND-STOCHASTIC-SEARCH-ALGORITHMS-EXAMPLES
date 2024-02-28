@@ -5,15 +5,16 @@ alea RANDOM;
 chromosome::chromosome( int ell ) {
     Longueur = ell;
     genes = new gene[Longueur];
+    Fitness = 0;
 }
 
-chromosome::chromosome( const chromosome &C ) {
-    Longueur = C.Longueur;
+chromosome::chromosome( const chromosome &chrom ) {
+    Longueur = chrom.Longueur;
     genes = new gene[Longueur];
     for ( int i = 0; i < Longueur; i++ ) {
-        genes[i] = C.genes[i];
+        genes[i] = chrom.genes[i];
     }
-    Fitness = C.Fitness;
+    Fitness = chrom.Fitness;
 }
 
 void chromosome::evaluer() {
@@ -45,14 +46,13 @@ void chromosome::mutation( double pmut ) {
     }
 }
 
-void chromosome::mutation1bit( double pmut ) {
-    if ( RANDOM.flip(pmut) ) {
-        int i = RANDOM.uniform(0, Longueur);
-        genes[i].mutation();
-    }
+void chromosome::mutation1bit() {
+    int i = RANDOM.uniform(0, Longueur - 1);
+    genes[i].mutation();
 }
 
 void chromosome::hamming_mutation( double pmut ) {
+    
 }
 
 void chromosome::bin2string( char *str ) {
@@ -66,6 +66,20 @@ void chromosome::copieGene( chromosome &C, int *locus, int n ) {
     for ( int i = 0; i < n; i++ ) {
         genes[locus[i]] = C.genes[locus[i]];
     }
+}
+
+chromosome & chromosome::operator=(const chromosome &chrom) {
+    if ( this == &chrom ) {
+        return *this;
+    }
+    Longueur = chrom.Longueur;
+    delete[] genes;
+    genes = new gene[Longueur];
+    for ( int i = 0; i < Longueur; i++ ) {
+        genes[i] = chrom.genes[i];
+    }
+    Fitness = chrom.Fitness;
+    return *this;
 }
 
 std::ostream &operator<<(std::ostream &out, chromosome &chrom) {

@@ -34,6 +34,12 @@ int main()
     cout << "Fitness C1 = " << C1.fitness() << endl;
     cout << "Fitness C2 = " << C2.fitness() << endl;
 
+    // bin2string test
+    char str[51];
+    C1.bin2string(str);
+    cout << "C1 = " << str << endl;
+
+    
 
     
     return 0;

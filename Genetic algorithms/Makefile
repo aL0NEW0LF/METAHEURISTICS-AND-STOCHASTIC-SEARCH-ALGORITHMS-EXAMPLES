@@ -1,4 +1,3 @@
-
 .SUFFIXES: .C .o
 CXX = g++
 CXXFLAGS = -g
@@ -8,10 +7,9 @@ OBJS = obj/alea.o obj/chromosome.o obj/gene.o obj/main.o
 ${EXEC}: ${OBJS}
 	${CXX} ${CXXFLAGS} -o ${EXEC} ${OBJS}
 
-.C.o: # Abstract rule
+.C.o:
 	${CXX} ${CXXFLAGS} -c $<
-# Still need to list the dependencies for object files
-# Compiling the source files
+
 obj/alea.o: src/alea.cpp include/alea.hpp
 	${CXX} ${CXXFLAGS} -c $< -o $@
 

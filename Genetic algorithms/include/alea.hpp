@@ -7,13 +7,12 @@
 
 class alea
 {   
-    private:
-        std::default_random_engine generator;
     public:
         alea() {}
         ~alea() {}
         int bernoulli( double prob );
         int flip( double prob );
+        int uniform( int a, int b );
         double uniform( double a, double b );
         double normal( double mean, double std );
 };

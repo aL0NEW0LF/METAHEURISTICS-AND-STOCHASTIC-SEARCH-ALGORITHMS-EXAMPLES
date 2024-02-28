@@ -23,12 +23,13 @@ class chromosome
     public:
         chromosome(int ell = para->lchrom);
         chromosome(const chromosome &chrom);
-        ~chromosome() { delete[] genes;}
+        ~chromosome() { delete[] genes; }
 
         /* getters */
         double fitness() { return Fitness; }
         int  longueur() { return Longueur; }
-        
+        gene *get_genes() { return genes; }
+
         /* setters */
         inline void set_valeur(const int &locus, const int &value) { genes[locus] = int(value); }
         void set_fitness(double fit) { Fitness = fit; }
@@ -42,7 +43,7 @@ class chromosome
         // mutation aléatoire des genes.
         void mutation(double pmut);
         // muter un seul bit de façon aléatoire
-        void mutation1bit(double pmut);
+        void mutation1bit();
         // chercher dans le net
         void hamming_mutation(double pmut);
         
