@@ -25,3 +25,9 @@ Then you can run the generated executable:
 ```shell
 ./main
 ```
+
+# TODO
+- [X] class random
+- [X] class chromosome (code)
+- [ ] class population
+- [ ] selection
