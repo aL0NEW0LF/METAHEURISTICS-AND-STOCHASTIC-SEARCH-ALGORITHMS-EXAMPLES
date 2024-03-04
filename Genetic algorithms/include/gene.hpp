@@ -8,8 +8,7 @@
 
 extern alea RANDOM;
 
-class gene  
-{
+class gene {
     private:
         int Allele;  
     public:
