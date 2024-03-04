@@ -8,18 +8,19 @@
 #include "./gene.hpp"
 #include "./alea.hpp"
 #include "./param.hpp"
+#include "./fonc.hpp"
 
 extern param *para;
 extern alea RANDOM;
 
-class chromosome
-{
+class chromosome {
     private:
         // les genes du chromosome
         gene   *genes; 
         int    Longueur;
         // valeur de fitness du chromosome
         double Fitness;
+    
     public:
         chromosome(int ell = para->lchrom);
         chromosome(const chromosome &chrom);
@@ -34,6 +35,7 @@ class chromosome
         inline void set_valeur(const int &locus, const int &value) { genes[locus] = int(value); }
         void set_fitness(double fit) { Fitness = fit; }
         
+        long double objfonc();
         // evaluer Chromosome
         void evaluer();
         // initialisation aléatoire

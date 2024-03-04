@@ -17,19 +17,24 @@ chromosome::chromosome( const chromosome &chrom ) {
     Fitness = chrom.Fitness;
 }
 
-/* evaluate function pseudocode, until we implemente the parameters class  */
-/* void chromosome::evaluer() {
-    if(para->type_option){
-        Fitness = objfunc(*this);
-    } else {
-        Fitness = -objfonc(*this);
-    }
-} */
+long double chromosome::objfonc() {
+    //
+    // convertir chromosome en chaîne de caractères
+    //
+    char *str = new char [ Longueur ];
+    bin2string( str );
+            
+    //  insertion de la fonction modifiee  
+    long double v = objective_fonc( str, Longueur );
+    delete [] str;
+    return v;
+}
 
 void chromosome::evaluer() {
-    Fitness = 0;
-    for ( int i = 0; i < Longueur; i++ ) {
-        Fitness += genes[i].allele();
+    if(para->Type_Optim){
+        Fitness = objfonc();
+    } else {
+        Fitness = -objfonc();
     }
 }
 
@@ -40,11 +45,16 @@ void chromosome::random() {
 }
 
 void chromosome::init( std::ifstream &in1 ) {
-    for ( int i = 0; i < Longueur; i++ ) {
-        char bit;
-        in1 >> bit;
-        genes[i].init(bit);
+    int j,val;
+    char  s[200] = "";
+
+    in1.getline( s, 200 );
+    for( j = 0; j< para->lchrom; j++ ) {  //strlen(s)
+        //if (s[j] 
+        genes[j].init(s[j]);
     }
+        
+    std::cout <<std::endl;
 }
 
 void chromosome::mutation( double pmut ) {
@@ -60,8 +70,52 @@ void chromosome::mutation1bit() {
     genes[i].mutation();
 }
 
-void chromosome::hamming_mutation( double pmut ) {
-    
+void chromosome::hamming_mutation(double pmut) {
+    int i, k, j, dham, l; 
+    int *temp, *ham, *poly;
+    int mini, maxi;
+    mini = 0;
+    maxi = para->lchrom;
+    maxi--;
+    k = RANDOM.uniform(mini, maxi) + 1;
+    j = RANDOM.uniform(mini, maxi) + 1;
+    dham = maxi-k;
+    temp = new int[k];
+    ham = new int[dham];
+    poly = new int[j];
+
+    for(i=mini;i<dham;i++)
+        ham[i]=1;
+
+    for(i=mini;i<k;i++) {        
+        l=RANDOM.uniform(mini, maxi) + 1;
+        j=RANDOM.uniform(mini, maxi) + 1;
+        
+        if (j>l) 
+            poly[i]=0;
+        else 
+            poly[i]=1;
+    }   
+
+    for(i=0;i<=maxi;i++) 
+        temp[i]=0;
+
+    for(i=0;i<dham;i++) {
+        j=int(pow(2,i));
+
+        if (j<dham)
+            temp[j] = ham[i];
+    }
+
+    for(i=0;i<maxi;i++) {
+        if(!(temp[i])) 
+            temp[i]=poly[i%k];
+    }
+
+    for (i=0;i<maxi;i++) {
+        if (temp[i]) 
+            genes[i].mutation();
+    }
 }
 
 void chromosome::bin2string( char *str ) {

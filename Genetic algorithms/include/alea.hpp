@@ -5,8 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-class alea
-{   
+class alea {   
     public:
         alea() {}
         ~alea() {}
