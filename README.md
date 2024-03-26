@@ -13,6 +13,10 @@ This project is a simple implementation of genetic algorithms in C++.
 >
 > In Linux, you can install it using the package manager of your distribution.
 
+```shell
+cd "genetic algorithms"
+```
+
 Then you can run the following command to build the project:
 
 ```shell
@@ -22,7 +26,7 @@ make
 If you don't have make installed, you can compile the project using the following command:
 
 ```shell
-g++ -Wall main.cpp src/alea.cpp src/gene.cpp src/chromosome.cpp -o main
+g++ -Wall main.cpp src/alea.cpp src/gene.cpp src/chromosome.cpp src/crossover.cpp src/fichier.cpp src/fonc.cpp src/population.cpp src/utils.cpp -o main
 ```
 
 Then you can run the generated executable:
